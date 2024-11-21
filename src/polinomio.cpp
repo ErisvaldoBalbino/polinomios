@@ -13,7 +13,7 @@
  *   Se o polinômio atual for 3x^2 e inserir(2, 3) for chamado,
  *   o resultado será 2x^3 + 3x^2 + x.
  */
-void Polinomio::inserir(float coef, int expo){
+void Polinomio::inserir(int coef, int expo){
 	if (coef == 0) return;
 
 	Monomio* novoMonomio = new Monomio(coef, expo);
@@ -120,7 +120,7 @@ int Polinomio::T() const{
  * @return O valor do polinômio avaliado.
  *
  */
-float Polinomio::Avaliar(float variavel) const{
+float Polinomio::Avaliar(int variavel) const{
 	float resultado = 0;
 
 	Monomio* atual = head;
