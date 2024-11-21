@@ -2,11 +2,11 @@
 #define MONOMIO_H
 
 struct Monomio {
-	float coef;
+	int coef;
 	int expo;
 	Monomio* prox;
 
-	Monomio (float coef, int expo){
+	Monomio (int coef, int expo){
 		this->coef = coef;
 		this->expo = expo;
 		prox = nullptr;
