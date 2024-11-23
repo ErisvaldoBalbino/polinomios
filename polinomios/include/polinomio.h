@@ -11,6 +11,7 @@ struct Polinomio {
 		this->head = nullptr;
 	}
 
+
 	void inserir(int coef, int expo);
 	void Simplificar();
 	int G() const;

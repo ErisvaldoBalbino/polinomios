@@ -118,6 +118,17 @@ int main() {
             std::cout << "Resultado: " << p << std::endl;
             std::cout << "--------------------------------" << std::endl;
         }
+        else if (linha == "t" || linha == "T") {
+            std::cout << "Tamanho do polinomio " << std::endl;
+
+            std::getline(arquivo, linha);
+            Polinomio p = StringParaPolinomio(linha);
+
+            std::cout << ""<<p<<"" << std::endl;
+
+            std::cout << "Tamanho: " << p.T() << std::endl;
+            std::cout << "--------------------------------" << std::endl;
+        }
         else {
             std::cerr << "Essa operacao nao existe: " << linha << std::endl;
         }

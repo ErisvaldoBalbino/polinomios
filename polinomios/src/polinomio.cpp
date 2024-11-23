@@ -142,51 +142,37 @@ float Polinomio::Avaliar(int variavel) const{
  */
 
 std::string Polinomio::P() const {
-	if (head == nullptr)
-	{
+	if (head == nullptr) {
 		return "Não existem termos!";
 	}
-
 
 	Monomio* atual = head;
 	std::string resultado;
 	bool primeiro = true;
 
-	while(atual != nullptr){
-		if (atual->coef >= 0 && primeiro == false)
-		{
+	while (atual != nullptr) {
+		if (atual->coef >= 0 && !primeiro) {
 			resultado += " + ";
+		} else if (atual->coef < 0 && !primeiro) {
+			resultado += " ";
 		}
 
-
-		if (atual->coef != 1 || atual->coef == 0)
-		{
-			resultado += std::to_string(static_cast<int>(atual->coef));
-		}
-		else
-		{
+		if (atual->coef != 1 || atual->expo == 0) {
 			resultado += std::to_string(atual->coef);
 		}
 
-		if (atual->expo != 0)
-		{
-			if (atual->expo != 1)
-			{
-				resultado += "x^" + std::to_string(atual->expo);
-			}
-			else
-			{
-				resultado += "x";
+		if (atual->expo != 0) {
+			resultado += "x";
+			if (atual->expo != 1) {
+				resultado += "^" + std::to_string(atual->expo);
 			}
 		}
 
 		primeiro = false;
 		atual = atual->prox;
-
 	}
 
 	return resultado;
-
 }
 
 /** Realiza a soma de dois polinômios.
@@ -314,6 +300,7 @@ Polinomio operator*(const Polinomio& poli1, const Polinomio& poli2){
 		p2 = poli2.head;
 	}
 
+	resultado.Simplificar();
 	return resultado;
 }
 
