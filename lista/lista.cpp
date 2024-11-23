@@ -55,58 +55,30 @@ struct List
     }
 
     bool Existe(Node* node){
-        if (head == nullptr) return false;
+        return findNode(node) != nullptr;
+    }
 
-        Node* curr = head;
-
-        while (curr != nullptr)
+    std::pair<int, int> ObterValor(Node* node){
+        Node* foundNode = findNode(node);
+        if (foundNode)
         {
-            if (curr == node)
-            {
-                return true;
-            } 
-                
-            curr = curr->next;
+            return {foundNode->element1, foundNode->element2};
+        }
+        return {-1,-1};
+    }
+
+    bool AlterarNo(Node* node, int newElement1, int newElement2) {
+        Node* foundNode = findNode(node);
+        if (foundNode) {
+            foundNode->element1 = newElement1;
+            foundNode->element2 = newElement2;
+            return true;
         }
         return false;
     }
 
-    void ObterValor(Node* node){
-        if (head == nullptr) std::cout << "Empty";
-
-        Node* curr = head;
-
-        while (curr != nullptr)
-        {
-            if (curr == node)
-            {
-                std::cout << curr->element1 << " " << curr->element2 << std::endl;
-            } 
-                
-            curr = curr->next;
-        }
-    }
-
-    void AlterarNo(Node* node, int newElement1, int newElement2){
-        if (head == nullptr) std::cout << "Empty";
-
-        Node* curr = head;
-
-        while (curr != nullptr)
-        {
-            if (curr == node)
-            {
-                curr->element1 = newElement1;
-                curr->element2 = newElement2;
-                return;
-            } 
-                
-            curr = curr->next;
-        }
-    }
-
     int Tamanho(){
-        if (head == nullptr) std::cout << "Empty";
+        if (head == nullptr) return 0;
 
         Node* curr = head;
         int counter = 0;
@@ -145,7 +117,10 @@ struct List
     }
 
     void mostrarALL(){
-        if (head == nullptr) std::cout << "Empty";
+        if (head == nullptr){ 
+            std::cout << "Empty"; 
+            return;
+        }
 
         Node* curr = head;
 
@@ -166,6 +141,19 @@ struct List
         }
         head = nullptr;
     }
+
+    Node* findNode(Node* node){
+        Node* temp = head;
+        while (temp != nullptr)
+        {
+            if (temp == node)
+            {
+                return temp;
+            }
+            temp = temp->next;
+        }
+        return nullptr;
+    }
 };
 
 int main(){
@@ -183,16 +171,16 @@ int main(){
 
     lista.mostrarALL();
 
-    lista.ObterValor(no1);
-
-    std::cout << lista.Tamanho() << std::endl;
-    std::cout << lista.Existe(no4) << std::endl;
-
-    lista.AlterarNo(no1, 5, 10);
-    lista.ObterValor(no1);
-
-    lista.Excluir(no2);
+    std::cout << "Tamanho da lista: " << lista.Tamanho() << std::endl;
+    std::cout << "No4 existe?: " << lista.Existe(no4) << std::endl;
     
+    auto [e1, e2] = lista.ObterValor(no1);
+    std::cout << "Valor do primeiro no: " << e1 << ", " << e2 << std::endl;
+    lista.AlterarNo(no1, 5, 10);
+    auto [b1, b2] = lista.ObterValor(no1);
+    std::cout << "Valor do primeiro no alterado: " << b1 << ", " << b2 << std::endl;
+
+    std::cout << "Lista apos excluir no2:" << std::endl;
     lista.mostrarALL();
 
     return 0;
